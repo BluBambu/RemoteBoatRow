@@ -16,10 +16,9 @@ public class RowController : NetworkBehaviour
 
     private bool isLeftOar;
 
-    private void Awake()
+    private void Start()
     {
         boatManager = GameObject.FindGameObjectWithTag("Boat").GetComponent<BoatManager>();
-    
         isLeftOar = boatManager.isLeftOar();
     }
 
