@@ -23,12 +23,32 @@ public class RowController : MonoBehaviour
 
     void Update()
     {
+        // var gyro = Input.gyro;
+        // gyro.enabled = true;
+
+        // ConsoleProDebug.Watch("Gyro", gyro.rotationRate.ToString());
+
+        // if (Mathf.Abs(gyro.rotationRate.x) + Mathf.Abs(gyro.rotationRate.y) > .5)
+        // {
+        //     Debug.Log(Mathf.Abs(gyro.rotationRate.x) + Mathf.Abs(gyro.rotationRate.y));
+        // }
+        
+
         var linearAcc = Input.acceleration;
 
         ConsoleProDebug.Watch("Last linear acceleration", linearAcc.ToString());
 
-        if (wasLastAccXPositive)
+        // if (wasLastAccXPositive)
         {
+            if (wasLastAccXPositive)
+            {
+                lastTroughAccX = 0;
+            }
+            else
+            {
+                lastPeakAccX = 0;
+            }
+
             if (linearAcc.x > 0)
             {
                 // User is doing upstroke, record the max up upswing
@@ -36,18 +56,31 @@ public class RowController : MonoBehaviour
                 {
                     lastPeakAccX = linearAcc.x;
                 }
+
+                wasLastAccXPositive = true;
             }
             else if (linearAcc.x < 0)
             {
                 if (linearAcc.x < lastPeakAccX)
                 {
-
+                    lastTroughAccX = linearAcc.x;
                 }
-            }
-        }
-        else
-        {
 
+                if (wasLastAccXPositive)
+                {
+                    var delta = lastPeakAccX - lastTroughAccX;
+
+                    if (delta > .1)
+                    {
+                        Debug.Log("New accelerometer delta: " + delta);
+
+                        rigidbody.AddRelativeForce(0, 0, ForceInput * Time.deltaTime * (delta * 2));
+                        rigidbody.AddRelativeTorque(Vector3.up * TorqueInput * Time.deltaTime * (delta * 2));
+                    }
+                }
+
+                wasLastAccXPositive = false;
+            }
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
