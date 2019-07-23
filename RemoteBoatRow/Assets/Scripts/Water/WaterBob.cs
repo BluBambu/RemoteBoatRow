@@ -20,6 +20,8 @@ public class WaterBob : MonoBehaviour
 
     private void Update()
     {
-        transform.position = initialPosition - Vector3.up * Mathf.Sin((Time.time + offset) * period) * height;
+        var newHeight = initialPosition.y - Mathf.Sin((Time.time + offset) * period) * height;
+
+        transform.position = new Vector3(transform.position.x, newHeight, transform.position.z);
     }
 }

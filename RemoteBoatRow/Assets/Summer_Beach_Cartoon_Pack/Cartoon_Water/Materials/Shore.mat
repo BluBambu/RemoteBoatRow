@@ -4,8 +4,9 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Shore
   m_Shader: {fileID: 4800000, guid: ac2bd3936e4e0ff4b81ea9f20d3206da, type: 3}
   m_ShaderKeywords: 
@@ -85,7 +86,7 @@ Material:
     m_Floats:
     - _BorderWidth: 5
     - _BumpScale: 1
-    - _Cutoff: 0.505
+    - _Cutoff: 0.9
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Glossiness: 0.5

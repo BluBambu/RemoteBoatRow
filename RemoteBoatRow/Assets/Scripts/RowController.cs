@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RowController : MonoBehaviour
 {
+    private const float TorqueInput = 80;
+    private const float ForceInput = 80;
+
     private bool wasLastAccXPositive;
     private bool wasLastAccZPositive;
     private float lastPeakAccX;
@@ -11,9 +14,11 @@ public class RowController : MonoBehaviour
     private float lastPeakAccZ;
     private float lastTroughZ;
 
-    void Start()
+    private Rigidbody rigidbody;
+
+    void Awake()
     {
-        
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -43,6 +48,18 @@ public class RowController : MonoBehaviour
         else
         {
 
+        }
+
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            rigidbody.AddRelativeForce(0, 0, ForceInput * Time.deltaTime);
+            rigidbody.AddRelativeTorque(Vector3.up * TorqueInput * Time.deltaTime);
+        }
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            rigidbody.AddRelativeForce(0, 0, ForceInput * Time.deltaTime);
+            rigidbody.AddRelativeTorque(Vector3.up * -TorqueInput * Time.deltaTime);
         }
     }
 }
