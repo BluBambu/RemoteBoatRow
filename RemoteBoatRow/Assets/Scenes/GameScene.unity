@@ -506,7 +506,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 132750, guid: 29cab5e773b866c448fc512b24d0225e, type: 3}
       propertyPath: m_Name
-      value: Oar_01 (1)
+      value: Left Oar
       objectReference: {fileID: 0}
     - target: {fileID: 461488, guid: 29cab5e773b866c448fc512b24d0225e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2765,7 +2765,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 132750, guid: 29cab5e773b866c448fc512b24d0225e, type: 3}
       propertyPath: m_Name
-      value: Oar_01
+      value: Right Oar
       objectReference: {fileID: 0}
     - target: {fileID: 461488, guid: 29cab5e773b866c448fc512b24d0225e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2906,6 +2906,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boat
       objectReference: {fileID: 0}
+    - target: {fileID: 141506, guid: 9337d6d2c5c49e8498a3b42334011f5c, type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
     - target: {fileID: 486654, guid: 9337d6d2c5c49e8498a3b42334011f5c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2987,9 +2991,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2046680861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75a1371a6f61345358e4bb1a6bec984f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8cd808abcf2904583beb60dafe89ba71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncInterval: 0.1
 --- !u!54 &2046680865
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3006,3 +3011,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 1
+--- !u!114 &2046680866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046680861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverOnly: 0
+  localPlayerAuthority: 0
+  m_AssetId: 9337d6d2c5c49e8498a3b42334011f5c
+  m_SceneId: 3760060050
+--- !u!114 &2046680867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046680861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncInterval: 0.1
+  compressRotation: 1

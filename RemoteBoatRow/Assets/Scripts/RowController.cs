@@ -1,12 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class RowController : MonoBehaviour
+public class RowController : NetworkBehaviour
 {
-    private const float TorqueInput = 80;
-    private const float ForceInput = 80;
-
     private bool wasLastAccXPositive;
     private bool wasLastAccZPositive;
     private float lastPeakAccX;
@@ -14,32 +12,25 @@ public class RowController : MonoBehaviour
     private float lastPeakAccZ;
     private float lastTroughZ;
 
-    private Rigidbody rigidbody;
+    private BoatManager boatManager;
 
-    void Awake()
+    private bool isLeftOar;
+
+    private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        boatManager = GameObject.FindGameObjectWithTag("Boat").GetComponent<BoatManager>();
+    
+        isLeftOar = boatManager.isLeftOar();
     }
 
-    void Update()
+    private void Update()
     {
-        // var gyro = Input.gyro;
-        // gyro.enabled = true;
-
-        // ConsoleProDebug.Watch("Gyro", gyro.rotationRate.ToString());
-
-        // if (Mathf.Abs(gyro.rotationRate.x) + Mathf.Abs(gyro.rotationRate.y) > .5)
-        // {
-        //     Debug.Log(Mathf.Abs(gyro.rotationRate.x) + Mathf.Abs(gyro.rotationRate.y));
-        // }
-        
-
-        var linearAcc = Input.acceleration;
-
-        ConsoleProDebug.Watch("Last linear acceleration", linearAcc.ToString());
-
-        // if (wasLastAccXPositive)
+        if (isLocalPlayer)
         {
+            var linearAcc = Input.acceleration;
+
+            ConsoleProDebug.Watch("Last linear acceleration", linearAcc.ToString());
+
             if (wasLastAccXPositive)
             {
                 lastTroughAccX = 0;
@@ -72,27 +63,34 @@ public class RowController : MonoBehaviour
 
                     if (delta > .1)
                     {
-                        Debug.Log("New accelerometer delta: " + delta);
+                        var rowFactor = delta * 2;
 
-                        rigidbody.AddRelativeForce(0, 0, ForceInput * Time.deltaTime * (delta * 2));
-                        rigidbody.AddRelativeTorque(Vector3.up * TorqueInput * Time.deltaTime * (delta * 2));
+                        Debug.Log("New accelerometer delta: " + delta);
+                        Debug.Log("Rowing by a factor of " + rowFactor);
+
+                        CmdRowOar(rowFactor);
                     }
                 }
-
                 wasLastAccXPositive = false;
             }
-        }
 
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            rigidbody.AddRelativeForce(0, 0, ForceInput * Time.deltaTime);
-            rigidbody.AddRelativeTorque(Vector3.up * TorqueInput * Time.deltaTime);
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                CmdRowOar(1);
+            }
         }
+    }
 
-        if (Input.GetKey(KeyCode.LeftArrow))
+    [Command]
+    private void CmdRowOar(float rowFactor)
+    {
+        if (isLeftOar)
         {
-            rigidbody.AddRelativeForce(0, 0, ForceInput * Time.deltaTime);
-            rigidbody.AddRelativeTorque(Vector3.up * -TorqueInput * Time.deltaTime);
+            boatManager.RowLeftOar(rowFactor);
+        }
+        else
+        {
+            boatManager.RowRightOar(rowFactor);
         }
     }
 }
