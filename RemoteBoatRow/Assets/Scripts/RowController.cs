@@ -81,15 +81,17 @@ public class RowController : NetworkBehaviour
     }
 
     [Command]
-    private void CmdRowOar(float rowFactor)
+    public void CmdRowOar(double rowFactor)
     {
+        Debug.Log("Moving oar: " + isLeftOar + " IsLeft, " + rowFactor + " rowFactor");
+
         if (isLeftOar)
         {
-            boatManager.RowLeftOar(rowFactor);
+            boatManager.RowLeftOar((float)rowFactor);
         }
         else
         {
-            boatManager.RowRightOar(rowFactor);
+            boatManager.RowRightOar((float)rowFactor);
         }
     }
 }

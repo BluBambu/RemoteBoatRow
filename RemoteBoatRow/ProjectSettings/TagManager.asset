@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Boat
   - WinCanvas
+  - NetworkManager
   layers:
   - Default
   - TransparentFX

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class GameCompleteWatcher : MonoBehaviour
+public class GameCompleteWatcher : NetworkBehaviour
 {
     public GameObject WinCanvas;
 
