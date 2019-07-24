@@ -11,19 +11,7 @@ public class LobbyManager : MonoBehaviour
     private const int Port = 44123;
 
     public TMP_Text CreateGameIpText;
-    public Button CreateGameButton;
     public TMP_InputField IpAddressInputField;
-    public Button JoinGameButton;
-
-    private NetworkManager networkManager;
-    private TelepathyTransport telepathyTransport;
-
-    private void Awake()
-    {
-        var networkManagerObj = GameObject.FindGameObjectWithTag("NetworkManager");
-        networkManager = networkManagerObj.GetComponent<NetworkManager>();
-        telepathyTransport = networkManagerObj.GetComponent<TelepathyTransport>();
-    }
 
     private void Start()
     {
@@ -37,7 +25,7 @@ public class LobbyManager : MonoBehaviour
         
         InitNetworkManagerSettings();
 
-        networkManager.StartHost();
+        NetworkManager.singleton.StartHost();
     }
 
     public void OnJoinGameButtonClick()
@@ -60,13 +48,13 @@ public class LobbyManager : MonoBehaviour
 
         InitNetworkManagerSettings();
 
-        networkManager.StartClient();
+        NetworkManager.singleton.StartClient();
     }
 
     private void InitNetworkManagerSettings()
     {
-        networkManager.networkAddress = GetLocalIpAddress();
-        telepathyTransport.port = Port;
+        NetworkManager.singleton.networkAddress = GetLocalIpAddress();
+        NetworkManager.singleton.gameObject.GetComponent<TelepathyTransport>().port = Port;
     }
 
     private string GetLocalIpAddress()
