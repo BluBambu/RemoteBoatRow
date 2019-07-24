@@ -7,6 +7,8 @@ TagManager:
   - Boat
   - WinCanvas
   - NetworkManager
+  - RightOar
+  - LeftOar
   layers:
   - Default
   - TransparentFX
