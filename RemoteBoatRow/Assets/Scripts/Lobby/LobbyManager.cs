@@ -8,7 +8,7 @@ using System;
 
 public class LobbyManager : MonoBehaviour
 {
-    private const int Port = 44123;
+    private const int Port = 12346;
 
     public TMP_Text CreateGameIpText;
     public TMP_InputField IpAddressInputField;
@@ -20,10 +20,13 @@ public class LobbyManager : MonoBehaviour
 
     public void OnCreateGameButtonClick()
     {
+        string localIpAddress = GetLocalIpAddress();
+
         Debug.Log(string.Format("Create game button clicked, starting session on {0}:{1}",
-            GetLocalIpAddress(), Port));
-        
-        InitNetworkManagerSettings();
+            localIpAddress, Port));
+
+        NetworkManager.singleton.networkAddress = localIpAddress;
+        NetworkManager.singleton.gameObject.GetComponent<TelepathyTransport>().port = Port;
 
         NetworkManager.singleton.StartHost();
     }
@@ -46,15 +49,10 @@ public class LobbyManager : MonoBehaviour
         Debug.Log(string.Format("Join game button was clicked, attempting to join game on {0}",
             ipAddresString));
 
-        InitNetworkManagerSettings();
+        NetworkManager.singleton.networkAddress = ipAddresString;
+        NetworkManager.singleton.gameObject.GetComponent<TelepathyTransport>().port = Port;
 
         NetworkManager.singleton.StartClient();
-    }
-
-    private void InitNetworkManagerSettings()
-    {
-        NetworkManager.singleton.networkAddress = GetLocalIpAddress();
-        NetworkManager.singleton.gameObject.GetComponent<TelepathyTransport>().port = Port;
     }
 
     private string GetLocalIpAddress()
