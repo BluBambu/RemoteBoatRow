@@ -28,14 +28,8 @@ public class BoatManager : NetworkBehaviour
 
     public bool isLeftOar()
     {
-        var returnVal = isLeftOarTaken;
-
-        if (isLeftOarTaken)
-        {
-            isLeftOarTaken = false;
-        }
-
-        return returnVal;
+        isLeftOarTaken = !isLeftOarTaken;
+        return isLeftOarTaken;
     }
 
     public void RowLeftOar(float rowFactor)
