@@ -8,7 +8,7 @@ using System;
 
 public class LobbyManager : MonoBehaviour
 {
-    private const int Port = 12346;
+    private const int Port = 12347;
 
     public TMP_Text CreateGameIpText;
     public TMP_InputField IpAddressInputField;

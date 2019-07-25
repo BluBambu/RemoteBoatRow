@@ -277,6 +277,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61439326}
   m_CullTransparentMesh: 0
+--- !u!1 &178755547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 178755548}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &178755548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178755547}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &814909358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,6 +1434,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1439620029}
   - component: {fileID: 1439620031}
+  - component: {fileID: 1439620032}
   - component: {fileID: 1439620030}
   m_Layer: 0
   m_Name: NetworkManager
@@ -1479,7 +1510,7 @@ MonoBehaviour:
   DebugEnabled: 0
   ServerBindAll: 1
   ServerBindAddress: 127.0.0.1
-  CommunicationPort: 7777
+  CommunicationPort: 12347
   MaxPacketSizeInKb: 64
   Channels: 0100000002000000
   CustomMaxPeerLimit: 0
@@ -1509,7 +1540,7 @@ MonoBehaviour:
   offlineScene: Lobby
   onlineScene: GameScene
   transport: {fileID: 1439620030}
-  networkAddress: localhost
+  networkAddress: 127.0.0.1
   maxConnections: 2
   playerPrefab: {fileID: 3728416771167459378, guid: 74177c754a84d42648709cf8bae87c41,
     type: 3}
@@ -1517,6 +1548,21 @@ MonoBehaviour:
   playerSpawnMethod: 1
   spawnPrefabs:
   - {fileID: 0}
+--- !u!114 &1439620032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439620028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showGUI: 1
+  offsetX: 0
+  offsetY: 0
 --- !u!1 &1571594422
 GameObject:
   m_ObjectHideFlags: 0

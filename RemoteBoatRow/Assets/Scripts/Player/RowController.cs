@@ -38,7 +38,7 @@ public class RowController : NetworkBehaviour
     {
         var linearAcc = Input.acceleration;
 
-        ConsoleProDebug.Watch("Last linear acceleration", linearAcc.ToString());
+        // ConsoleProDebug.Watch("Last linear acceleration", linearAcc.ToString());
 
         if (_wasLastAccXPositive)
         {
